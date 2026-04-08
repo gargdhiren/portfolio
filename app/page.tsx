@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 
@@ -58,33 +58,58 @@ const projects = [
 ];
 
 export default function Portfolio() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   useEffect(() => {
     const cursor = document.getElementById("cursor");
     window.addEventListener("mousemove", (e) => {
       if (cursor) cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
     });
+
+    // Add smooth scroll
+    document.documentElement.style.scrollBehavior = 'smooth';
   }, []);
 
   return (
-    <div className="bg-[#f3f3f3] min-h-screen font-mono text-black">
+    <div className="bg-[#f3f3f3] min-h-screen font-mono text-black overflow-x-hidden">
       <div id="cursor" className="fixed w-3 h-3 bg-black rounded-full pointer-events-none z-50"></div>
 
       {/* NAVBAR */}
-      <nav className="sticky top-0 z-50 flex justify-between items-center px-8 py-4 border-b-4 border-black bg-white">
+      <motion.nav
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-8 py-4 border-b-4 border-black bg-white shadow-lg"
+      >
 
   {/* LEFT: Logo / Name */}
+  <div className="font-black text-lg">
+    <a href="#about" className="hover:text-pink-500 transition-colors">DHIREN GARG</a>
+  </div>
   
   {/* CENTER: Navigation */}
   <div className="hidden md:flex gap-6 text-sm font-bold">
-    <a href="#about" className="hover:underline">ABOUT</a>
-    <a href="#experience" className="hover:underline">EXPERIENCE</a>
-    <a href="#projects" className="hover:underline">PROJECTS</a>
-    <a href="#skills" className="hover:underline">SKILLS</a>
-    <a href="#contact" className="hover:underline">CONTACT</a>
+    <a href="#about" className="hover:underline hover:text-cyan-500 transition-colors">ABOUT</a>
+    <a href="#experience" className="hover:underline hover:text-cyan-500 transition-colors">EXPERIENCE</a>
+    <a href="#projects" className="hover:underline hover:text-cyan-500 transition-colors">PROJECTS</a>
+    <a href="#skills" className="hover:underline hover:text-cyan-500 transition-colors">SKILLS</a>
+    <a href="#contact" className="hover:underline hover:text-cyan-500 transition-colors">CONTACT</a>
   </div>
 
+  {/* MOBILE MENU BUTTON */}
+  <button
+    onClick={() => setIsMenuOpen(!isMenuOpen)}
+    className="md:hidden p-2 border-2 border-black shadow-[2px_2px_0px_black] bg-white"
+  >
+    <div className="w-5 h-5 flex flex-col justify-center items-center">
+      <span className={`block w-4 h-0.5 bg-black transition-transform ${isMenuOpen ? 'rotate-45 translate-y-1' : '-translate-y-1'}`}></span>
+      <span className={`block w-4 h-0.5 bg-black transition-opacity ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}></span>
+      <span className={`block w-4 h-0.5 bg-black transition-transform ${isMenuOpen ? '-rotate-45 -translate-y-1' : 'translate-y-1'}`}></span>
+    </div>
+  </button>
+
   {/* RIGHT: Actions */}
-  <div className="flex items-center gap-3">
+  <div className="hidden md:flex items-center gap-3">
 
     {/* Open to work badge */}
     <div className="bg-green-300 border-2 border-black px-2 py-1 text-xs font-bold shadow-[3px_3px_0px_black]">
@@ -102,11 +127,50 @@ export default function Portfolio() {
 
   </div>
 
-</nav>
+</motion.nav>
+
+{/* MOBILE MENU */}
+{isMenuOpen && (
+  <motion.div
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -20 }}
+    className="fixed top-16 left-0 right-0 z-40 bg-white border-b-4 border-black md:hidden"
+  >
+    <div className="flex flex-col px-8 py-4 space-y-4">
+      <a href="#about" onClick={() => setIsMenuOpen(false)} className="font-bold hover:text-cyan-500 transition-colors">ABOUT</a>
+      <a href="#experience" onClick={() => setIsMenuOpen(false)} className="font-bold hover:text-cyan-500 transition-colors">EXPERIENCE</a>
+      <a href="#projects" onClick={() => setIsMenuOpen(false)} className="font-bold hover:text-cyan-500 transition-colors">PROJECTS</a>
+      <a href="#skills" onClick={() => setIsMenuOpen(false)} className="font-bold hover:text-cyan-500 transition-colors">SKILLS</a>
+      <a href="#contact" onClick={() => setIsMenuOpen(false)} className="font-bold hover:text-cyan-500 transition-colors">CONTACT</a>
+      
+      <div className="flex items-center gap-3 pt-4 border-t-2 border-black">
+        <div className="bg-green-300 border-2 border-black px-2 py-1 text-xs font-bold shadow-[3px_3px_0px_black]">
+          🟢 Open to Work
+        </div>
+        <motion.button
+          whileHover={{ scale: 1.05, rotate: -1 }}
+          onClick={() => window.open("https://drive.google.com/file/d/169wtkSr1N4Ygf0PWCa52bJbD8jzySsVL/view?usp=sharing")}
+          className="font-bold text-sm border-2 border-black px-3 py-1 shadow-[4px_4px_0px_black] hover:bg-yellow-200 transition"
+        >
+          📄 Resume
+        </motion.button>
+      </div>
+    </div>
+  </motion.div>
+)}
 
 
 {/* ABOUT (HERO STYLE) */}
-<section id="about" className="px-8 py-20 border-b-4 border-black bg-[#f3f3f3] relative overflow-hidden">
+<motion.section
+  id="about"
+  initial={{ opacity: 0, y: 100, rotateX: 20 }}
+  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+  transition={{ duration: 1, ease: "easeOut" }}
+  viewport={{ once: true }}
+  className="px-8 pt-24 pb-20 border-b-4 border-black bg-[#f3f3f3] relative overflow-hidden perspective-1000"
+  style={{ transformStyle: 'preserve-3d' }}
+>
 
   {/* BACKGROUND STRIPES */}
   <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
@@ -184,26 +248,43 @@ export default function Portfolio() {
   </motion.div>
 
   {/* FLOATING TAGS (cleaner than random icons) */}
-  <div className="absolute -top-4 left-2 bg-cyan-400 border-4 border-black px-3 py-1 text-xs font-bold shadow-[3px_3px_0px_black] rotate-[-6deg]">
+  <motion.div
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    className="absolute -top-4 left-2 bg-cyan-400 border-4 border-black px-3 py-1 text-xs font-bold shadow-[3px_3px_0px_black] rotate-[-6deg]"
+  >
     💼 Dev
-  </div>
+  </motion.div>
 
-  <div className="absolute top-12 -right-6 bg-pink-400 border-4 border-black px-3 py-1 text-xs font-bold shadow-[3px_3px_0px_black] rotate-[6deg]">
+  <motion.div
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    className="absolute top-12 -right-6 bg-pink-400 border-4 border-black px-3 py-1 text-xs font-bold shadow-[3px_3px_0px_black] rotate-[6deg]"
+  >
     🚀 Designer
-  </div>
+  </motion.div>
 
-  <div className="absolute bottom-2 left-12 bg-green-300 border-4 border-black px-3 py-1 text-xs font-bold shadow-[3px_3px_0px_black] rotate-[-4deg]">
+  <motion.div
+    whileHover={{ scale: 1.1, rotate: 3 }}
+    className="absolute bottom-2 left-12 bg-green-300 border-4 border-black px-3 py-1 text-xs font-bold shadow-[3px_3px_0px_black] rotate-[-4deg]"
+  >
     ⚡ Fast Learner
-  </div>
+  </motion.div>
 
 </div>
 
   </div>
-</section>
+</motion.section>
 
       {/* EXPERIENCE + IMPACT */}
      {/* EXPERIENCE */}
-<section id="experience" className="px-8 py-16 border-b-4 border-black">
+<motion.section
+  id="experience"
+  initial={{ opacity: 0, y: 100, rotateY: -20 }}
+  whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+  transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+  viewport={{ once: true }}
+  className="px-8 py-16 border-b-4 border-black perspective-1000"
+  style={{ transformStyle: 'preserve-3d' }}
+>
   <h2 className="text-3xl font-black mb-8">💼 EXPERIENCE</h2>
 
   <div className="grid md:grid-cols-2 gap-8">
@@ -212,7 +293,10 @@ export default function Portfolio() {
     <div className="space-y-8">
 
       {/* SDE */}
-      <div className="border-4 border-black bg-white p-6 shadow-[10px_10px_0px_black]">
+      <motion.div
+        whileHover={{ scale: 1.02, rotate: 1 }}
+        className="border-4 border-black bg-white p-6 shadow-[10px_10px_0px_black]"
+      >
         <h3 className="font-black text-xl">
           ION Trading — Software Engineer
         </h3>
@@ -250,10 +334,13 @@ export default function Portfolio() {
             Designed and delivered scalable systems with robust end-to-end testing.
           </li>
         </ul>
-      </div>
+      </motion.div>
 
       {/* INTERN */}
-      <div className="border-4 border-black bg-white p-6 shadow-[10px_10px_0px_black]">
+      <motion.div
+        whileHover={{ scale: 1.02, rotate: -1 }}
+        className="border-4 border-black bg-white p-6 shadow-[10px_10px_0px_black]"
+      >
         <h3 className="font-black text-xl">
           ION Trading — Software Engineering Intern
         </h3>
@@ -282,7 +369,7 @@ export default function Portfolio() {
             Debugged a long-standing Angular production issue and reported it to the framework team.
           </li>
         </ul>
-      </div>
+      </motion.div>
 
     </div>
 
@@ -291,7 +378,10 @@ export default function Portfolio() {
       <h3 className="font-black text-xl">🔥 MOST IMPACTFUL WORK</h3>
 
       {/* OWASP */}
-      <div className="border-4 border-black bg-pink-200 p-5 shadow-[6px_6px_0px_black]">
+      <motion.div
+        whileHover={{ scale: 1.03, y: -5 }}
+        className="border-4 border-black bg-pink-200 p-5 shadow-[6px_6px_0px_black]"
+      >
         <h4 className="font-bold">Automated Security Testing Framework</h4>
         <p className="text-xs mb-2">
           OWASP ZAP, Selenium, Bash, GitLab CI/CD
@@ -310,32 +400,46 @@ export default function Portfolio() {
             Connected ZAP findings with SonarQube to block high-severity deployments.
           </li>
         </ul>
-      </div>
+      </motion.div>
 
       {/* EDA */}
-      <div className="border-4 border-black bg-cyan-200 p-5 shadow-[6px_6px_0px_black]">
+      <motion.div
+        whileHover={{ scale: 1.03, y: -5 }}
+        className="border-4 border-black bg-cyan-200 p-5 shadow-[6px_6px_0px_black]"
+      >
         <h4 className="font-bold">Event-Driven Architecture</h4>
         <p className="text-sm mt-2">
           Enabled asynchronous real-time workflows and decoupled <b>3+ interdependent services</b>
           using event-driven architecture and microservices.
         </p>
-      </div>
+      </motion.div>
 
       {/* CYPRESS */}
-      <div className="border-4 border-black bg-yellow-200 p-5 shadow-[6px_6px_0px_black]">
+      <motion.div
+        whileHover={{ scale: 1.03, y: -5 }}
+        className="border-4 border-black bg-yellow-200 p-5 shadow-[6px_6px_0px_black]"
+      >
         <h4 className="font-bold">Cypress Automation Framework</h4>
         <p className="text-sm mt-2">
           Built E2E automation with <b>25+ test cases</b>, saving <b>144+ developer hours annually</b>
           by replacing manual pre-release verification.
         </p>
-      </div>
+      </motion.div>
     </div>
 
   </div>
-</section>
+</motion.section>
 
       {/* PROJECTS */}
-     <section id="projects" className="px-8 py-16 border-b-4 border-black">
+     <motion.section
+       id="projects"
+       initial={{ opacity: 0, y: 100, rotateX: -15 }}
+       whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+       transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+       viewport={{ once: true }}
+       className="px-8 py-16 border-b-4 border-black perspective-1000"
+       style={{ transformStyle: 'preserve-3d' }}
+     >
         <h2 className="text-3xl font-black mb-4">🚀 PROJECTS</h2>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -375,10 +479,18 @@ export default function Portfolio() {
             </motion.div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* SKILLS (LIKE IMAGE) */}
-      <section id="skills" className="px-8 py-16 border-b-4 border-black">
+      <motion.section
+        id="skills"
+        initial={{ opacity: 0, y: 100, rotateY: 20 }}
+        whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+        transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+        viewport={{ once: true }}
+        className="px-8 py-16 border-b-4 border-black perspective-1000"
+        style={{ transformStyle: 'preserve-3d' }}
+      >
         <div className="inline-block bg-yellow-300 border-4 border-black px-5 py-2 font-black shadow-[6px_6px_0px_black] rotate-[-2deg]">
           SKILLS
         </div>
@@ -387,52 +499,70 @@ export default function Portfolio() {
           {[
             "Java","Spring Boot","Angular","C++","Microservices","RAG","Vector database","GenAI","Kafka","PostgreSQL","MongoDB","C++","CI/CD","Testing","OWASP","SonarQube","HTML 5","LLM"
           ].map((skill,i)=>(
-            <div key={i} className={`border-4 border-black px-4 py-2 font-bold shadow-[4px_4px_0px_black] ${i%3===0?"bg-pink-300":i%3===1?"bg-cyan-300":"bg-yellow-200"}`}>
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              className={`border-4 border-black px-4 py-2 font-bold shadow-[4px_4px_0px_black] ${i%3===0?"bg-pink-300":i%3===1?"bg-cyan-300":"bg-yellow-200"}`}
+            >
               {skill}
-            </div>
+            </motion.div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* RESUME */}
 
       {/* 🔥 CONTACT + RESUME COMBINED */}
-      <section id="contact" className="px-8 py-20 border-b-4 border-black bg-[#f3f3f3]">
+      <motion.section
+        id="contact"
+        initial={{ opacity: 0, y: 100, rotateX: 15 }}
+        whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+        transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
+        viewport={{ once: true }}
+        className="px-8 py-20 border-b-4 border-black bg-[#f3f3f3] perspective-1000"
+        style={{ transformStyle: 'preserve-3d' }}
+      >
 
         <h2 className="text-3xl font-black mb-6">📬 LET'S CONNECT</h2>
 
         <div className="grid md:grid-cols-4 gap-6">
 
-          <div
+          <motion.div
+            whileHover={{ scale: 1.05, y: -10 }}
             onClick={() => window.open("https://www.linkedin.com/in/dhiren-garg/")}
             className="bg-cyan-400 border-4 border-black p-5 shadow-[6px_6px_0px_black] text-center cursor-pointer"
           >
             💼
             <h3 className="font-bold mt-2">LinkedIn</h3>
-          </div>
+          </motion.div>
 
-          <div
+          <motion.div
+            whileHover={{ scale: 1.05, y: -10 }}
             onClick={() => window.open("https://github.com/gargdhiren")}
             className="bg-purple-300 border-4 border-black p-5 shadow-[6px_6px_0px_black] text-center cursor-pointer"
           >
             💻
             <h3 className="font-bold mt-2">GitHub</h3>
-          </div>
+          </motion.div>
 
-          <div className="bg-pink-400 border-4 border-black p-5 shadow-[6px_6px_0px_black] text-center">
+          <motion.div
+            whileHover={{ scale: 1.05, y: -10 }}
+            className="bg-pink-400 border-4 border-black p-5 shadow-[6px_6px_0px_black] text-center"
+          >
             📧
             <h3 className="font-bold mt-2">1234dhirengarg@gmail.com</h3>
-          </div>
+          </motion.div>
 
-          <div
+          <motion.div
+            whileHover={{ scale: 1.05, y: -10 }}
             className="bg-yellow-300 border-4 border-black p-5 shadow-[6px_6px_0px_black] text-center cursor-pointer"
           >
             📱
             <h3 className="font-bold mt-2">+91-9646000949</h3>
-          </div>
+          </motion.div>
 
         </div>
-      </section>
+      </motion.section>
 
     </div>
   );
