@@ -26,10 +26,10 @@ const experience = [
     type: "Full-time",
     tags: ["Java", "Spring Boot", "Angular", "Kafka", "PostgreSQL", "GenAI", "CI/CD"],
     bullets: [
-      { text: "Architected an automated OWASP ZAP-based DAST framework integrated with GitLab CI/CD and SonarQube, eliminating manual penetration testing and reducing testing effort by 80%.", metric: "80%" },
-      { text: "Redesigned Java/Spring Boot service layer architecture for contingent order types in trading systems, improving order execution reliability while supporting 1000+ transactions/sec.", metric: "1000+ TPS" },
+      { text: "Architected an automated OWASP ZAP-based DAST framework integrated with GitLab CI/CD and SonarQube, eliminating manual penetration testing and reducing testing effort by 55%.", metric: "55%" },
+      { text: "Redesigned Java/Spring Boot service layer architecture for contingent order types in trading systems, improving order execution reliability while supporting 10000+ transactions/sec.", metric: "10000+ TPS" },
       { text: "Developed an AI-powered command interface using GenAI/LLM integration and prompt engineering to convert plain English into backend REST API actions, reducing manual work by 20% across 10,000+ financial instruments.", metric: "10K+ instruments" },
-      { text: "Streamlined code review workflows using workflow automation and AI-assisted auditing, reducing code review time by 30% per PR across a team of 10+ engineers.", metric: "30% faster" },
+      { text: "Streamlined code review workflows using workflow automation and AI-assisted auditing, reducing code review time by 25% per PR across a team of 12 engineers.", metric: "25% faster" },
     ],
   },
   {
@@ -40,9 +40,9 @@ const experience = [
     type: "Internship",
     tags: ["Angular", "TypeScript", "Nx", "Cypress", "RxJS"],
     bullets: [
-      { text: "Built a Cypress E2E automation framework covering 25+ critical workflows, saving 144+ developer hours annually by replacing manual QA with CI/CD-driven validation.", metric: "144+ hrs/yr" },
-      { text: "Engineered 10+ Angular standalone components using TypeScript and implemented Nx modularization, reducing bundle size by 25%.", metric: "25% smaller" },
-      { text: "Optimized production Angular components by resolving memory leaks, reducing memory consumption by 30% and eliminating UI latency.", metric: "30% less RAM" },
+      { text: "Built a Cypress E2E automation framework covering 28 critical workflows, saving 144+ developer hours annually by replacing manual QA with CI/CD-driven validation.", metric: "144+ hrs/yr" },
+      { text: "Engineered 10+ Angular standalone components using TypeScript and implemented Nx modularization, reducing bundle size by 23%.", metric: "23% smaller" },
+      { text: "Optimized production Angular components by resolving memory leaks, reducing memory consumption by 33% and eliminating UI latency.", metric: "33% less" },
     ],
   },
 ];
@@ -100,8 +100,8 @@ const skillsData: Record<string, { items: string[]; icon: string }> = {
 };
 
 const impactStats = [
-  { value: 1000, suffix: "+", label: "Transactions/sec", desc: "High-throughput trading systems" },
-  { value: 80, suffix: "%", label: "Testing Reduced", desc: "DAST automation framework" },
+  { value: 10000, suffix: "+", label: "Transactions/sec", desc: "High-throughput trading systems" },
+  { value: 55, suffix: "%", label: "Testing Reduced", desc: "DAST automation framework" },
   { value: 144, suffix: "+", label: "Dev Hours Saved", desc: "Per year via E2E automation" },
   { value: 600, suffix: "+", label: "LeetCode Solved", desc: "DSA & C++" },
 ];
@@ -400,7 +400,7 @@ export default function Portfolio() {
             <motion.p initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="mt-8 text-sm leading-relaxed max-w-lg text-[#555]">
               I build systems that handle pressure. 2 years at{" "}
               <span className="font-bold text-[#1a1a1a]">ION Trading</span> — engineering microservices for trading platforms processing{" "}
-              <span className="font-bold text-[#1a1a1a] bg-yellow-100 px-1">1000+ transactions/sec</span>.
+              <span className="font-bold text-[#1a1a1a] bg-yellow-100 px-1">10000+ transactions/sec</span>.
               From event-driven architecture to GenAI-powered interfaces, I turn complex problems into production-ready solutions.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }} className="flex flex-wrap gap-2 mt-6">
