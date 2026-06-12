@@ -14,7 +14,7 @@ const journey = [
   { year: "Jun 2024", title: "Graduated", desc: "B.Tech Computer Engineering — CGPA 8.56/10", icon: "🎓" },
   { year: "Jul 2024", title: "Promoted to SDE", desc: "Full-time Software Engineer at ION Trading, Noida", icon: "⚡" },
   { year: "2025", title: "Angular OSS Contributor", desc: "Found & reported a framework bug — acknowledged by Angular team", icon: "🐛" },
-  { year: "Mar 2026", title: "Looking for Next Chapter", desc: "Open to full-stack and backend engineering roles", icon: "🔭" },
+  { year: "Mar 2026", title: "Looking for Next Chapter", desc: "Open to software engineering roles", icon: "🔭" },
 ];
 
 const experience = [
@@ -578,7 +578,7 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#FF6B9D] mb-2">Get in Touch</p>
           <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-4">LET&apos;S BUILD<br />SOMETHING GREAT</h2>
-          <p className="text-sm text-[#888] mb-12 max-w-md">Currently open to full-stack and backend engineering roles. I bring 2 years of trading systems experience, a strong DSA foundation, and a passion for building at scale.</p>
+          <p className="text-sm text-[#888] mb-12 max-w-md">Currently open to software engineering roles. I bring 2 years of trading systems experience, a strong DSA foundation, and a passion for building at scale.</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {contactLinks.map((c, i) => (
               <a key={i} href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="block border-2 border-[#e0e0e0] p-5 hover:border-[#1a1a1a] hover:-translate-y-1 transition-all group">
