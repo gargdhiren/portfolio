@@ -24,10 +24,10 @@ const experience = [
     period: "Jul 2024 – Mar 2026",
     location: "Noida, India",
     type: "Full-time",
-    tags: ["Java", "Spring Boot", "Angular", "Kafka", "PostgreSQL", "GenAI", "CI/CD"],
+    tags: ["Angular", "TypeScript", "Nx", "Cypress", "Jest", "RxJS", "GenAI", "CI/CD"],
     bullets: [
       { text: "Architected an automated OWASP ZAP-based DAST framework integrated with GitLab CI/CD and SonarQube, eliminating manual penetration testing and reducing testing effort by 55%.", metric: "55%" },
-      { text: "Redesigned Java/Spring Boot service layer architecture for contingent order types in trading systems, improving order execution reliability while supporting 10000+ transactions/sec.", metric: "10000+ TPS" },
+      { text: "Redesigned service layer architecture for contingent order types in trading systems, improving order execution reliability while supporting 10000+ transactions/sec.", metric: "10000+ TPS" },
       { text: "Developed an AI-powered command interface using GenAI/LLM integration and prompt engineering to convert plain English into backend REST API actions, reducing manual work by 20% across 10,000+ financial instruments.", metric: "10K+ instruments" },
       { text: "Streamlined code review workflows using workflow automation and AI-assisted auditing, reducing code review time by 25% per PR across a team of 12 engineers.", metric: "25% faster" },
     ],
@@ -38,7 +38,7 @@ const experience = [
     period: "Jan 2024 – Jun 2024",
     location: "Noida, India",
     type: "Internship",
-    tags: ["Angular", "TypeScript", "Nx", "Cypress", "RxJS"],
+    tags: ["Angular", "TypeScript", "Nx", "Cypress", "Jest", "RxJS"],
     bullets: [
       { text: "Built a Cypress E2E automation framework covering 28 critical workflows, saving 144+ developer hours annually by replacing manual QA with CI/CD-driven validation.", metric: "144+ hrs/yr" },
       { text: "Engineered 10+ Angular standalone components using TypeScript and implemented Nx modularization, reducing bundle size by 23%.", metric: "23% smaller" },
@@ -77,24 +77,14 @@ const projects = [
     link: "https://github.com/gargdhiren/Finance-Guru",
     accent: "#FFE66D",
     featured: false,
-  },
-  {
-    name: "System Design & LLD",
-    tagline: "Design Pattern Library",
-    description: "Low-level design implementations of real-world systems — applying SOLID principles, GoF patterns, and scalable architecture thinking.",
-    tech: ["Java", "Design Patterns", "SOLID", "OOP"],
-    highlights: [{ label: "Patterns", value: "10+" }, { label: "Approach", value: "SOLID" }, { label: "Focus", value: "Scalability" }],
-    link: "https://github.com/gargdhiren/Low-level-design",
-    accent: "#A8E6CF",
-    featured: false,
-  },
+  }
 ];
 
 const skillsData: Record<string, { items: string[]; icon: string }> = {
-  Backend: { items: ["Java", "Spring Boot", "Spring Cloud", "REST APIs", "JPA/Hibernate", "Microservices", "Apache Kafka", "System Design"], icon: "⚙️" },
-  Frontend: { items: ["Angular", "React", "TypeScript", "JavaScript", "HTML5", "CSS3", "RxJS", "Nx"], icon: "🎨" },
+  Backend: { items: ["Java", "Spring Boot", "REST APIs", "JPA/Hibernate", "System Design"], icon: "⚙️" },
+  Frontend: { items: ["Angular", "React", "Redux", "TypeScript", "JavaScript", "HTML5", "CSS3", "Nx"], icon: "🎨" },
   "AI / ML": { items: ["GenAI", "LLM Integration", "RAG", "Prompt Engineering", "Vector Databases", "Spring AI"], icon: "🧠" },
-  "Data & Cloud": { items: ["PostgreSQL", "MySQL", "Neo4j", "AWS (EC2)", "Docker", "Docker Compose"], icon: "☁️" },
+  "Data & Cloud": { items: ["PostgreSQL", "MySQL", "Neo4j", "Docker"], icon: "☁️" },
   Testing: { items: ["JUnit", "Jest", "Cypress", "Selenium", "OWASP ZAP"], icon: "🧪" },
   "DevOps & Tools": { items: ["Git", "GitLab CI/CD", "Maven", "SonarQube", "Postman", "JIRA", "Agile/Scrum"], icon: "🔧" },
 };
@@ -120,7 +110,7 @@ const contactLinks = [
 ];
 
 const navLinks = ["about", "journey", "experience", "projects", "skills", "contact"];
-const heroTags = ["Java", "Spring Boot", "Angular", "TypeScript", "Kafka", "GenAI/LLM", "PostgreSQL", "Docker"];
+const heroTags = ["Angular", "TypeScript", "React.js", "CI/CD", "GenAI/LLM"];
 
 /* ═══════════════════════════════════════════════════════
    COMPONENTS
@@ -399,9 +389,9 @@ export default function Portfolio() {
             </motion.div>
             <motion.p initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="mt-8 text-sm leading-relaxed max-w-lg text-[#555]">
               I build systems that handle pressure. 2 years at{" "}
-              <span className="font-bold text-[#1a1a1a]">ION Trading</span> — engineering microservices for trading platforms processing{" "}
+              <span className="font-bold text-[#1a1a1a]">ION Trading</span> — engineering trading platforms processing{" "}
               <span className="font-bold text-[#1a1a1a] bg-yellow-100 px-1">10000+ transactions/sec</span>.
-              From event-driven architecture to GenAI-powered interfaces, I turn complex problems into production-ready solutions.
+              From automation to GenAI-powered interfaces, I turn complex problems into production-ready solutions.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }} className="flex flex-wrap gap-2 mt-6">
               {heroTags.map((s, i) => (<span key={i} className="text-[10px] font-bold border border-[#ddd] px-2 py-1 rounded bg-white hover:bg-[#1a1a1a] hover:text-white hover:border-[#1a1a1a] transition-all cursor-default">{s}</span>))}
