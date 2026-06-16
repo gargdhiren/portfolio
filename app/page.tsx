@@ -14,6 +14,7 @@ const journey = [
   { year: "Jun 2024", title: "Graduated", desc: "B.Tech Computer Engineering — CGPA 8.56/10", icon: "🎓" },
   { year: "Jul 2024", title: "Promoted to SDE", desc: "Full-time Software Engineer at ION Trading, Noida", icon: "⚡" },
   { year: "2025", title: "Angular OSS Contributor", desc: "Found & reported a framework bug — acknowledged by Angular team", icon: "🐛" },
+  { year: "2026", title: "Launched RevisionBuddy", desc: "Full-stack AI-powered notes & spaced repetition app — live on Vercel", icon: "🧠" },
   { year: "Mar 2026", title: "Looking for Next Chapter", desc: "Open to software engineering roles", icon: "🔭" },
 ];
 
@@ -28,7 +29,7 @@ const experience = [
     bullets: [
       { text: "Architected an automated OWASP ZAP-based DAST framework integrated with GitLab CI/CD and SonarQube, eliminating manual penetration testing and reducing testing effort by 55%.", metric: "55%" },
       { text: "Redesigned service layer architecture for contingent order types in trading systems, improving order execution reliability while supporting 10000+ transactions/sec.", metric: "10000+ TPS" },
-      { text: "Developed an AI-powered command interface using GenAI/LLM integration and prompt engineering to convert plain English into backend REST API actions, reducing manual work by 20% across 10,000+ financial instruments.", metric: "10K+ instruments" },
+      { text: "Developed an AI-powered command interface using TypeScript, JavaScript, and GenAI/LLM integration with prompt engineering to convert plain English into backend REST API actions, reducing manual work by 20% across 10,000+ financial instruments.", metric: "10K+ instruments" },
       { text: "Streamlined code review workflows using workflow automation and AI-assisted auditing, reducing code review time by 25% per PR across a team of 12 engineers.", metric: "25% faster" },
     ],
   },
@@ -49,22 +50,35 @@ const experience = [
 
 const projects = [
   {
+    name: "RevisionBuddy",
+    tagline: "AI-Powered Spaced Repetition",
+    description: "Notes app that auto-generates flashcards, cloze deletions, and MCQs from user notes using Groq LLM. Reviews are scheduled via a 5-box spaced repetition system with adaptive intervals to maximize long-term retention.",
+    tech: ["Next.js 16", "TypeScript", "React 19", "PostgreSQL", "Prisma", "Tailwind CSS", "Vercel AI SDK", "Groq"],
+    highlights: [{ label: "Card Types", value: "3" }, { label: "Review Boxes", value: "5" }, { label: "Status", value: "Live" }],
+    link: "https://github.com/gargdhiren/Revision-Buddy",
+    liveLink: "https://revision-and-notes-buddy.vercel.app",
+    accent: "#7C3AED",
+    featured: true,
+  },
+  {
     name: "PostIt",
     tagline: "Social Platform at Scale",
     description: "Event-driven social platform with real-time notifications, user connections, and content feeds — built with microservices architecture and hybrid SQL/graph persistence.",
     tech: ["Java", "Spring Boot", "Spring Cloud", "Kafka", "PostgreSQL", "Neo4j", "Docker"],
     highlights: [{ label: "Microservices", value: "6" }, { label: "REST Endpoints", value: "15" }, { label: "Kafka Topics", value: "5" }],
     link: "https://github.com/gargdhiren/PostIT",
+    liveLink: null,
     accent: "#FF6B9D",
     featured: true,
   },
   {
-    name: "AI-Document Assistant",
-    tagline: "RAG-Powered Q&A",
-    description: "Upload system design documents and ask questions — get context-aware answers using RAG with vector embeddings, cosine similarity, and multi-turn conversations.",
+    name: "DesignReviewer",
+    tagline: "RAG-Powered Document Q&A",
+    description: "AI-driven document review application that enables context-aware Q&A over uploaded PDFs using Retrieval-Augmented Generation (RAG), vector search, and PostgreSQL-backed embedding storage.",
     tech: ["Java", "Spring Boot", "Spring AI", "Ollama", "PostgreSQL", "RAG"],
     highlights: [{ label: "Pipeline", value: "RAG" }, { label: "Search", value: "Vector" }, { label: "Sessions", value: "Multi-turn" }],
     link: "https://github.com/gargdhiren/DesignReviewer",
+    liveLink: null,
     accent: "#4ECDC4",
     featured: true,
   },
@@ -75,18 +89,19 @@ const projects = [
     tech: ["JavaScript", "HTML5", "CSS3"],
     highlights: [{ label: "Result", value: "Runner-up" }, { label: "Participants", value: "500+" }, { label: "Scoring", value: "Real-time" }],
     link: "https://github.com/gargdhiren/Finance-Guru",
+    liveLink: null,
     accent: "#FFE66D",
     featured: false,
   }
 ];
 
 const skillsData: Record<string, { items: string[]; icon: string }> = {
-  Backend: { items: ["Java", "Spring Boot", "REST APIs", "JPA/Hibernate", "System Design"], icon: "⚙️" },
-  Frontend: { items: ["Angular", "React", "Redux", "TypeScript", "JavaScript", "HTML5", "CSS3", "Nx"], icon: "🎨" },
-  "AI / ML": { items: ["GenAI", "LLM Integration", "RAG", "Prompt Engineering", "Vector Databases", "Spring AI"], icon: "🧠" },
+  Backend: { items: ["Java", "Spring Boot", "Spring MVC", "REST APIs", "JPA/Hibernate", "Prisma", "Server Actions", "System Design"], icon: "⚙️" },
+  Frontend: { items: ["Angular", "React", "Next.js", "Redux", "TypeScript", "JavaScript", "Tailwind CSS", "HTML5", "CSS3", "Nx"], icon: "🎨" },
+  "AI / ML": { items: ["GenAI", "LLM Integration", "RAG", "Vercel AI SDK", "Prompt Engineering", "Vector Databases", "Spring AI"], icon: "🧠" },
   "Data & Cloud": { items: ["PostgreSQL", "MySQL", "Neo4j", "Docker"], icon: "☁️" },
   Testing: { items: ["JUnit", "Jest", "Cypress", "Selenium", "OWASP ZAP"], icon: "🧪" },
-  "DevOps & Tools": { items: ["Git", "GitLab CI/CD", "Maven", "SonarQube", "Postman", "JIRA", "Agile/Scrum"], icon: "🔧" },
+  "DevOps & Tools": { items: ["Git", "GitLab CI/CD", "Maven", "SonarQube", "Vercel", "Postman", "JIRA", "Agile/Scrum"], icon: "🔧" },
 };
 
 const impactStats = [
@@ -97,6 +112,7 @@ const impactStats = [
 ];
 
 const achievementCards = [
+  { icon: "🧠", title: "RevisionBuddy — Live App", desc: "Built and deployed a full-stack AI-powered spaced repetition app using Next.js, React, PostgreSQL, and Groq LLM. Live on Vercel.", link: "https://revision-and-notes-buddy.vercel.app", linkText: "Try RevisionBuddy ↗", accent: "#7C3AED" },
   { icon: "🐛", title: "Angular OSS Contributor", desc: "Discovered and reported a bug in Angular\u2019s structural directives — acknowledged by the Angular team and tracked as a confirmed issue.", link: "https://github.com/angular/angular/issues/65666", linkText: "angular/angular#65666", accent: "#4ECDC4" },
   { icon: "🥈", title: "BlackRock Hackathon", desc: "Built Finance Guru — an interactive financial literacy platform. Runner-up among 500+ participants across India.", link: null, linkText: null, accent: "#FFE66D" },
   { icon: "💻", title: "600+ LeetCode Problems", desc: "Consistent daily problem-solving in Data Structures, Algorithms, and C++. Focus on trees, graphs, and dynamic programming.", link: "https://leetcode.com/u/dhirengarg/", linkText: "View LeetCode Profile", accent: "#A8E6CF" },
@@ -110,7 +126,7 @@ const contactLinks = [
 ];
 
 const navLinks = ["about", "journey", "experience", "projects", "skills", "contact"];
-const heroTags = ["Angular", "TypeScript", "React.js", "CI/CD", "GenAI/LLM"];
+const heroTags = ["Angular", "TypeScript", "React.js", "Next.js", "CI/CD", "GenAI/LLM"];
 
 /* ═══════════════════════════════════════════════════════
    COMPONENTS
@@ -214,7 +230,6 @@ function LeetCodeHeatmap({ username }: { username: string }) {
     if (m !== lastMonth) { monthLabels.push({ label: months[m], col: i }); lastMonth = m; }
   });
 
-  // Calculate active days in last year
   let activeDays = 0;
   weeks.forEach(w => w.forEach(d => { if (getCount(d) > 0) activeDays++; }));
 
@@ -260,7 +275,6 @@ function LeetCodeHeatmap({ username }: { username: string }) {
       ) : (
         <div className="overflow-x-auto">
           <div style={{ minWidth: "750px" }}>
-            {/* Month labels */}
             <div className="flex mb-1" style={{ paddingLeft: "32px" }}>
               {monthLabels.map((m, i) => (
                 <span key={i} className="text-[9px] text-[#666] absolute" style={{ marginLeft: `${m.col * 15}px` }}>
@@ -271,14 +285,12 @@ function LeetCodeHeatmap({ username }: { username: string }) {
             <div style={{ height: "14px" }} />
 
             <div className="flex gap-0.5">
-              {/* Day labels */}
               <div className="flex flex-col gap-[3px] mr-1" style={{ width: "28px" }}>
                 {["", "Mon", "", "Wed", "", "Fri", ""].map((d, i) => (
                   <div key={i} className="text-[9px] text-[#666] h-[12px] flex items-center justify-end pr-1">{d}</div>
                 ))}
               </div>
 
-              {/* Heatmap grid */}
               <div className="flex gap-[3px]">
                 {weeks.map((wk, wi) => (
                   <div key={wi} className="flex flex-col gap-[3px]">
@@ -299,7 +311,6 @@ function LeetCodeHeatmap({ username }: { username: string }) {
               </div>
             </div>
 
-            {/* Legend */}
             <div className="flex items-center justify-end gap-1 mt-4">
               <span className="text-[9px] text-[#666] mr-1">Less</span>
               {[0, 2, 5, 10, 15].map((v, i) => (
@@ -368,7 +379,7 @@ export default function Portfolio() {
             {navLinks.map((s) => (<a key={s} href={`#${s}`} onClick={() => setMenuOpen(false)} className="block text-sm font-bold uppercase hover:text-[#FF6B9D]">{s}</a>))}
             <div className="flex items-center gap-3 pt-3 border-t border-gray-200">
               <span className="text-[10px] font-bold bg-green-100 text-green-800 border border-green-300 px-2 py-1 rounded-full">● OPEN TO WORK</span>
-              <a href="https://drive.google.com/file/d/169wtkSr1N4Ygf0PWCa52bJbD8jzySsVL/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-xs font-bold border-2 border-[#1a1a1a] px-3 py-1.5">RESUME ↗</a>
+              <a href="https://drive.google.com/file/d/1uoFo3oyyJbVTlkLfkpK4RZLbHgUpPNUC/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-xs font-bold border-2 border-[#1a1a1a] px-3 py-1.5">RESUME ↗</a>
             </div>
           </div>
         )}
@@ -399,7 +410,8 @@ export default function Portfolio() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }} className="flex flex-wrap gap-3 mt-8">
               <a href="#contact" className="text-xs font-bold bg-[#1a1a1a] text-white px-5 py-2.5 hover:bg-[#FF6B9D] transition-colors">GET IN TOUCH</a>
               <a href="#projects" className="text-xs font-bold border-2 border-[#1a1a1a] px-5 py-2.5 hover:bg-[#1a1a1a] hover:text-white transition-all">VIEW PROJECTS</a>
-              <a href="https://drive.google.com/file/d/169wtkSr1N4Ygf0PWCa52bJbD8jzySsVL/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-xs font-bold border-2 border-[#FF6B9D] text-[#FF6B9D] px-5 py-2.5 hover:bg-[#FF6B9D] hover:text-white transition-all">DOWNLOAD RESUME</a>
+              <a href="https://revision-and-notes-buddy.vercel.app" target="_blank" rel="noopener noreferrer" className="text-xs font-bold border-2 border-[#7C3AED] text-[#7C3AED] px-5 py-2.5 hover:bg-[#7C3AED] hover:text-white transition-all">TRY REVISIONBUDDY ↗</a>
+              <a href="https://drive.google.com/file/d/1uoFo3oyyJbVTlkLfkpK4RZLbHgUpPNUC/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-xs font-bold border-2 border-[#FF6B9D] text-[#FF6B9D] px-5 py-2.5 hover:bg-[#FF6B9D] hover:text-white transition-all">DOWNLOAD RESUME</a>
             </motion.div>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.6 }} className="mt-8 text-xs text-[#999]">
               🎓 Thapar University • B.Tech Computer Engineering • CGPA 8.56/10 • Class of 2024
@@ -495,12 +507,17 @@ export default function Portfolio() {
           <p className="text-sm text-[#888] mb-12 max-w-lg">Side projects where I experiment with architecture, AI, and scale.</p>
           <div className="grid md:grid-cols-2 gap-6 mb-6">
             {projects.filter(p => p.featured).map((p, i) => (
-              <a key={i} href={p.link} target="_blank" rel="noopener noreferrer" className="group block border-2 border-[#e0e0e0] bg-white p-8 hover:border-[#1a1a1a] hover:-translate-y-1 transition-all relative overflow-hidden">
+              <div key={i} className="group block border-2 border-[#e0e0e0] bg-white p-8 hover:border-[#1a1a1a] hover:-translate-y-1 transition-all relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-1.5 h-full" style={{ background: p.accent }} />
-                <span className="text-[9px] font-bold uppercase tracking-wider text-white px-2 py-0.5 rounded" style={{ background: p.accent }}>Featured</span>
-                <div className="flex items-start justify-between mt-4 mb-1">
-                  <h3 className="text-xl font-black">{p.name}</h3>
-                  <span className="text-sm text-[#999] group-hover:text-[#1a1a1a] transition-colors">↗</span>
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-white px-2 py-0.5 rounded" style={{ background: p.accent }}>Featured</span>
+                  {p.liveLink && (
+                    <a href={p.liveLink} target="_blank" rel="noopener noreferrer" className="text-[9px] font-bold uppercase tracking-wider text-white bg-green-600 px-2 py-0.5 rounded hover:bg-green-700 transition-colors">Live Demo ↗</a>
+                  )}
+                </div>
+                <div className="flex items-start justify-between mt-2 mb-1">
+                  <a href={p.link} target="_blank" rel="noopener noreferrer" className="text-xl font-black hover:text-[#FF6B9D] transition-colors">{p.name}</a>
+                  <a href={p.link} target="_blank" rel="noopener noreferrer" className="text-sm text-[#999] group-hover:text-[#1a1a1a] transition-colors">↗</a>
                 </div>
                 <p className="text-xs font-bold text-[#999] uppercase tracking-wider mb-3">{p.tagline}</p>
                 <p className="text-xs text-[#666] leading-relaxed mb-5">{p.description}</p>
@@ -510,7 +527,7 @@ export default function Portfolio() {
                 <div className="flex flex-wrap gap-1.5">
                   {p.tech.map((t, j) => (<span key={j} className="text-[9px] font-bold bg-[#f8f8f8] border border-[#eee] px-1.5 py-0.5 rounded">{t}</span>))}
                 </div>
-              </a>
+              </div>
             ))}
           </div>
           <div className="grid md:grid-cols-2 gap-6">
@@ -556,19 +573,18 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#FF6B9D] mb-2">Recognition</p>
           <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-12">ACHIEVEMENTS</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {achievementCards.map((a, i) => (
               <div key={i} onClick={() => a.link && window.open(a.link)} className={`border border-[#333] bg-[#161b22] p-6 hover:border-[#FF6B9D] hover:-translate-y-1 transition-all relative overflow-hidden ${a.link ? "cursor-pointer" : "cursor-default"}`}>
                 <div className="absolute top-0 left-0 w-full h-1" style={{ background: a.accent }} />
                 <div className="text-3xl mb-4 mt-2">{a.icon}</div>
                 <h3 className="text-sm font-black mb-2">{a.title}</h3>
                 <p className="text-xs text-[#888] leading-relaxed">{a.desc}</p>
-                {a.linkText && (<p className="text-[10px] font-bold text-[#FF6B9D] mt-3 uppercase tracking-wider">{a.linkText} ↗</p>)}
+                {a.linkText && (<p className="text-[10px] font-bold text-[#FF6B9D] mt-3 uppercase tracking-wider">{a.linkText}</p>)}
               </div>
             ))}
           </div>
 
-          {/* LEETCODE HEATMAP */}
           <LeetCodeHeatmap username="dhirengarg" />
         </div>
       </FadeSection>
@@ -601,6 +617,7 @@ export default function Portfolio() {
               { label: "LinkedIn", href: "https://www.linkedin.com/in/dhiren-garg/" },
               { label: "GitHub", href: "https://github.com/gargdhiren" },
               { label: "LeetCode", href: "https://leetcode.com/u/dhirengarg/" },
+              { label: "RevisionBuddy", href: "https://revision-and-notes-buddy.vercel.app" },
             ].map((l, i) => (<a key={i} href={l.href} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold text-[#999] hover:text-[#FF6B9D] uppercase tracking-wider transition-colors">{l.label}</a>))}
           </div>
         </div>
