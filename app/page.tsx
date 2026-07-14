@@ -28,8 +28,8 @@ const experience = [
     tags: ["Angular", "TypeScript", "Nx", "Cypress", "Jest", "RxJS", "GenAI", "CI/CD"],
     bullets: [
       { text: "Architected an automated OWASP ZAP-based DAST framework integrated with GitLab CI/CD and SonarQube, eliminating manual penetration testing and reducing testing effort by 55%.", metric: "55%" },
-      { text: "Redesigned service layer architecture for contingent order types in trading systems, improving order execution reliability while supporting 10000+ transactions/sec.", metric: "10000+ TPS" },
-      { text: "Developed an AI-powered command interface using TypeScript, JavaScript, and GenAI/LLM integration with prompt engineering to convert plain English into backend REST API actions, reducing manual work by 20% across 10,000+ financial instruments.", metric: "10K+ instruments" },
+      { text: "Redesigned service layer architecture for contingent order types in trading systems, improving order execution reliability and lifecycle management while supporting 10,000 transactions per hour.", metric: "10K/hr" },
+      { text: "Developed an AI-powered command interface using TypeScript, JavaScript, and GenAI/LLM integration with prompt engineering to convert plain English into backend REST API actions across 10,000+ financial instruments.", metric: "10K+ instruments" },
       { text: "Streamlined code review workflows using workflow automation and AI-assisted auditing, reducing code review time by 25% per PR across a team of 12 engineers.", metric: "25% faster" },
     ],
   },
@@ -84,7 +84,7 @@ const projects = [
   },
   {
     name: "Finance Guru",
-    tagline: "Hackathon Winner",
+    tagline: "Hackathon Runner-Up",
     description: "Interactive financial literacy platform with quiz engine and real-time scoring — built at BlackRock Hackathon, secured Runner-up among 500+ participants.",
     tech: ["JavaScript", "HTML5", "CSS3"],
     highlights: [{ label: "Result", value: "Runner-up" }, { label: "Participants", value: "500+" }, { label: "Scoring", value: "Real-time" }],
@@ -105,7 +105,7 @@ const skillsData: Record<string, { items: string[]; icon: string }> = {
 };
 
 const impactStats = [
-  { value: 10000, suffix: "+", label: "Transactions/sec", desc: "High-throughput trading systems" },
+  { value: 10000, suffix: "/hr", label: "Transactions", desc: "High-throughput trading systems" },
   { value: 55, suffix: "%", label: "Testing Reduced", desc: "DAST automation framework" },
   { value: 144, suffix: "+", label: "Dev Hours Saved", desc: "Per year via E2E automation" },
   { value: 600, suffix: "+", label: "LeetCode Solved", desc: "DSA & C++" },
@@ -127,6 +127,8 @@ const contactLinks = [
 
 const navLinks = ["about", "journey", "experience", "projects", "skills", "contact"];
 const heroTags = ["Angular", "TypeScript", "React.js", "Next.js", "CI/CD", "GenAI/LLM"];
+
+const RESUME_URL = "https://drive.google.com/file/d/1uoFo3oyyJbVTlkLfkpK4RZLbHgUpPNUC/view?usp=sharing";
 
 /* ═══════════════════════════════════════════════════════
    COMPONENTS
@@ -158,13 +160,13 @@ function AnimatedCounter({ value, suffix = "" }: { value: number; suffix?: strin
     }, 16);
     return () => clearInterval(timer);
   }, [isInView, value]);
-  return <span ref={ref}>{count}{suffix}</span>;
+  return <span ref={ref}>{count.toLocaleString()}{suffix}</span>;
 }
 
 function LeetCodeHeatmap({ username }: { username: string }) {
   const [calendarData, setCalendarData] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
-  const [totalSolved, setTotalSolved] = useState(0);
+  const [totalSolved, setTotalSolved] = useState<number | null>(null);
   const [error, setError] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
@@ -223,15 +225,19 @@ function LeetCodeHeatmap({ username }: { username: string }) {
   };
 
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const monthLabels: { label: string; col: number }[] = [];
+  // Grid-aligned month labels: one cell per week column, label only on the week a new month starts.
+  const monthRow: string[] = [];
   let lastMonth = -1;
-  weeks.forEach((w, i) => {
+  weeks.forEach((w) => {
     const m = w[0].getMonth();
-    if (m !== lastMonth) { monthLabels.push({ label: months[m], col: i }); lastMonth = m; }
+    if (m !== lastMonth) { monthRow.push(months[m]); lastMonth = m; }
+    else monthRow.push("");
   });
 
   let activeDays = 0;
   weeks.forEach(w => w.forEach(d => { if (getCount(d) > 0) activeDays++; }));
+
+  const displayTotal = totalSolved ?? "600+";
 
   return (
     <div ref={ref} className="border border-[#333] bg-[#0d1117] rounded-lg p-6 mt-8">
@@ -245,7 +251,7 @@ function LeetCodeHeatmap({ username }: { username: string }) {
         {!loading && !error && (
           <div className="flex gap-6">
             <div className="text-right">
-              <div className="text-lg font-black text-white">{totalSolved || "600+"}</div>
+              <div className="text-lg font-black text-white">{displayTotal}</div>
               <div className="text-[9px] text-[#666] uppercase tracking-wider">Total Solved</div>
             </div>
             <div className="text-right">
@@ -275,14 +281,15 @@ function LeetCodeHeatmap({ username }: { username: string }) {
       ) : (
         <div className="overflow-x-auto">
           <div style={{ minWidth: "750px" }}>
-            <div className="flex mb-1" style={{ paddingLeft: "32px" }}>
-              {monthLabels.map((m, i) => (
-                <span key={i} className="text-[9px] text-[#666] absolute" style={{ marginLeft: `${m.col * 15}px` }}>
-                  {m.label}
-                </span>
+            {/* month labels — one flex cell per week column, aligned to the grid below */}
+            <div className="flex gap-[3px]" style={{ paddingLeft: "32px" }}>
+              {monthRow.map((label, i) => (
+                <div key={i} className="text-[9px] text-[#666]" style={{ width: "12px" }}>
+                  {label}
+                </div>
               ))}
             </div>
-            <div style={{ height: "14px" }} />
+            <div style={{ height: "4px" }} />
 
             <div className="flex gap-0.5">
               <div className="flex flex-col gap-[3px] mr-1" style={{ width: "28px" }}>
@@ -355,10 +362,10 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-[#1a1a1a] overflow-x-hidden" style={{ fontFamily: "'IBM Plex Mono', 'JetBrains Mono', 'Courier New', monospace" }}>
 
-      <motion.div style={{ width: progressWidth }} className="fixed top-0 left-0 h-[3px] bg-[#FF6B9D] z-[60]" />
+      <motion.div style={{ width: progressWidth }} className="fixed top-0 left-0 h-[3px] bg-[#FF6B9D] z-[70]" />
 
       {/* NAV */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b-2 border-[#1a1a1a]">
+      <nav className="fixed top-0 left-0 right-0 z-[60] bg-white/95 backdrop-blur-sm border-b-2 border-[#1a1a1a]">
         <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-3">
           <a href="#about" className="font-black text-lg tracking-tight hover:text-[#FF6B9D] transition-colors">DG<span className="text-[#FF6B9D]">.</span></a>
           <div className="hidden md:flex items-center gap-1">
@@ -366,9 +373,9 @@ export default function Portfolio() {
           </div>
           <div className="hidden md:flex items-center gap-3">
             <span className="text-[10px] font-bold bg-green-100 text-green-800 border border-green-300 px-2 py-1 rounded-full animate-pulse">● OPEN TO WORK</span>
-            <a href="https://drive.google.com/file/d/1uoFo3oyyJbVTlkLfkpK4RZLbHgUpPNUC/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-xs font-bold border-2 border-[#1a1a1a] px-3 py-1.5 hover:bg-[#1a1a1a] hover:text-white transition-all">RESUME ↗</a>
+            <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="text-xs font-bold border-2 border-[#1a1a1a] px-3 py-1.5 hover:bg-[#1a1a1a] hover:text-white transition-all">RESUME ↗</a>
           </div>
-          <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden w-8 h-8 flex flex-col items-center justify-center gap-1.5">
+          <button onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} className="md:hidden w-8 h-8 flex flex-col items-center justify-center gap-1.5">
             <span className={`block w-5 h-0.5 bg-black transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[4px]" : ""}`} />
             <span className={`block w-5 h-0.5 bg-black transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
             <span className={`block w-5 h-0.5 bg-black transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[4px]" : ""}`} />
@@ -379,7 +386,7 @@ export default function Portfolio() {
             {navLinks.map((s) => (<a key={s} href={`#${s}`} onClick={() => setMenuOpen(false)} className="block text-sm font-bold uppercase hover:text-[#FF6B9D]">{s}</a>))}
             <div className="flex items-center gap-3 pt-3 border-t border-gray-200">
               <span className="text-[10px] font-bold bg-green-100 text-green-800 border border-green-300 px-2 py-1 rounded-full">● OPEN TO WORK</span>
-              <a href="https://drive.google.com/file/d/1uoFo3oyyJbVTlkLfkpK4RZLbHgUpPNUC/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-xs font-bold border-2 border-[#1a1a1a] px-3 py-1.5">RESUME ↗</a>
+              <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="text-xs font-bold border-2 border-[#1a1a1a] px-3 py-1.5">RESUME ↗</a>
             </div>
           </div>
         )}
@@ -401,7 +408,7 @@ export default function Portfolio() {
             <motion.p initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="mt-8 text-sm leading-relaxed max-w-lg text-[#555]">
               I build systems that handle pressure. 2 years at{" "}
               <span className="font-bold text-[#1a1a1a]">ION Trading</span> — engineering trading platforms processing{" "}
-              <span className="font-bold text-[#1a1a1a] bg-yellow-100 px-1">10000+ transactions/sec</span>.
+              <span className="font-bold text-[#1a1a1a] bg-yellow-100 px-1">10,000 transactions/hour</span>.
               From automation to GenAI-powered interfaces, I turn complex problems into production-ready solutions.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }} className="flex flex-wrap gap-2 mt-6">
@@ -411,14 +418,14 @@ export default function Portfolio() {
               <a href="#contact" className="text-xs font-bold bg-[#1a1a1a] text-white px-5 py-2.5 hover:bg-[#FF6B9D] transition-colors">GET IN TOUCH</a>
               <a href="#projects" className="text-xs font-bold border-2 border-[#1a1a1a] px-5 py-2.5 hover:bg-[#1a1a1a] hover:text-white transition-all">VIEW PROJECTS</a>
               <a href="https://revision-and-notes-buddy.vercel.app" target="_blank" rel="noopener noreferrer" className="text-xs font-bold border-2 border-[#7C3AED] text-[#7C3AED] px-5 py-2.5 hover:bg-[#7C3AED] hover:text-white transition-all">TRY REVISIONBUDDY ↗</a>
-              <a href="https://drive.google.com/file/d/1uoFo3oyyJbVTlkLfkpK4RZLbHgUpPNUC/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-xs font-bold border-2 border-[#FF6B9D] text-[#FF6B9D] px-5 py-2.5 hover:bg-[#FF6B9D] hover:text-white transition-all">DOWNLOAD RESUME</a>
+              <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="text-xs font-bold border-2 border-[#FF6B9D] text-[#FF6B9D] px-5 py-2.5 hover:bg-[#FF6B9D] hover:text-white transition-all">DOWNLOAD RESUME</a>
             </motion.div>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.6 }} className="mt-8 text-xs text-[#999]">
               🎓 Thapar University • B.Tech Computer Engineering • CGPA 8.56/10 • Class of 2024
             </motion.div>
           </div>
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4, duration: 0.8 }} className="hidden md:block relative">
-            <div className="w-[280px] h-[340px] border-2 border-[#1a1a1a] overflow-hidden relative bg-[#f0f0f0]">
+            <div className="w-[280px] h-[340px] border-2 border-[#1a1a1a] overflow-hidden relative bg-[#f0f0f0] shadow-[6px_6px_0_0_rgba(26,26,26,0.08)]">
               <img src="/image.jpeg" alt="Dhiren Garg" className="w-full h-full object-cover object-top" />
               <div className="absolute bottom-0 left-0 right-0 bg-[#1a1a1a] text-white px-4 py-2 text-[10px] font-bold tracking-wider">SDE @ ION TRADING • 2024–2026</div>
             </div>
@@ -427,7 +434,7 @@ export default function Portfolio() {
         </div>
         <div className="max-w-6xl mx-auto mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
           {impactStats.map((m, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 + i * 0.15, duration: 0.5 }} className="border border-[#e0e0e0] bg-white p-5 hover:border-[#1a1a1a] transition-colors group">
+            <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 + i * 0.15, duration: 0.5 }} className="border border-[#e0e0e0] bg-white p-5 hover:border-[#1a1a1a] hover:shadow-[4px_4px_0_0_rgba(255,107,157,0.15)] transition-all group">
               <div className="text-3xl font-black group-hover:text-[#FF6B9D] transition-colors"><AnimatedCounter value={m.value} suffix={m.suffix} /></div>
               <div className="text-[10px] font-bold uppercase tracking-wider mt-1">{m.label}</div>
               <div className="text-[10px] text-[#999] mt-0.5">{m.desc}</div>
@@ -517,7 +524,7 @@ export default function Portfolio() {
                 </div>
                 <div className="flex items-start justify-between mt-2 mb-1">
                   <a href={p.link} target="_blank" rel="noopener noreferrer" className="text-xl font-black hover:text-[#FF6B9D] transition-colors">{p.name}</a>
-                  <a href={p.link} target="_blank" rel="noopener noreferrer" className="text-sm text-[#999] group-hover:text-[#1a1a1a] transition-colors">↗</a>
+                  <a href={p.link} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} on GitHub`} className="text-sm text-[#999] group-hover:text-[#1a1a1a] transition-colors">↗</a>
                 </div>
                 <p className="text-xs font-bold text-[#999] uppercase tracking-wider mb-3">{p.tagline}</p>
                 <p className="text-xs text-[#666] leading-relaxed mb-5">{p.description}</p>
@@ -574,15 +581,23 @@ export default function Portfolio() {
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#FF6B9D] mb-2">Recognition</p>
           <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-12">ACHIEVEMENTS</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {achievementCards.map((a, i) => (
-              <div key={i} onClick={() => a.link && window.open(a.link)} className={`border border-[#333] bg-[#161b22] p-6 hover:border-[#FF6B9D] hover:-translate-y-1 transition-all relative overflow-hidden ${a.link ? "cursor-pointer" : "cursor-default"}`}>
-                <div className="absolute top-0 left-0 w-full h-1" style={{ background: a.accent }} />
-                <div className="text-3xl mb-4 mt-2">{a.icon}</div>
-                <h3 className="text-sm font-black mb-2">{a.title}</h3>
-                <p className="text-xs text-[#888] leading-relaxed">{a.desc}</p>
-                {a.linkText && (<p className="text-[10px] font-bold text-[#FF6B9D] mt-3 uppercase tracking-wider">{a.linkText}</p>)}
-              </div>
-            ))}
+            {achievementCards.map((a, i) => {
+              const cardInner = (
+                <>
+                  <div className="absolute top-0 left-0 w-full h-1" style={{ background: a.accent }} />
+                  <div className="text-3xl mb-4 mt-2">{a.icon}</div>
+                  <h3 className="text-sm font-black mb-2">{a.title}</h3>
+                  <p className="text-xs text-[#888] leading-relaxed">{a.desc}</p>
+                  {a.linkText && (<p className="text-[10px] font-bold text-[#FF6B9D] mt-3 uppercase tracking-wider">{a.linkText}</p>)}
+                </>
+              );
+              const base = "border border-[#333] bg-[#161b22] p-6 hover:border-[#FF6B9D] hover:-translate-y-1 transition-all relative overflow-hidden block h-full";
+              return a.link ? (
+                <a key={i} href={a.link} target="_blank" rel="noopener noreferrer" className={`${base} cursor-pointer`}>{cardInner}</a>
+              ) : (
+                <div key={i} className={`${base} cursor-default`}>{cardInner}</div>
+              );
+            })}
           </div>
 
           <LeetCodeHeatmap username="dhirengarg" />
@@ -611,7 +626,7 @@ export default function Portfolio() {
       {/* FOOTER */}
       <div className="border-t border-[#e0e0e0] px-6 py-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[10px] text-[#999] font-medium">© 2026 Dhiren Garg. Crafted with Next.js & Framer Motion.</p>
+          <p className="text-[10px] text-[#999] font-medium">© 2026 Dhiren Garg. Crafted with Next.js &amp; Framer Motion.</p>
           <div className="flex gap-4">
             {[
               { label: "LinkedIn", href: "https://www.linkedin.com/in/dhiren-garg/" },
