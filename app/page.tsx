@@ -70,7 +70,6 @@ const projects = [
     link: "https://github.com/gargdhiren/Revision-Buddy",
     liveLink: "https://revision-and-notes-buddy.vercel.app",
     accent: "#7C3AED",
-    featured: true,
   },
   {
     name: "PostIt",
@@ -81,7 +80,6 @@ const projects = [
     link: "https://github.com/gargdhiren/PostIT",
     liveLink: null,
     accent: "#FF6B9D",
-    featured: true,
   },
   {
     name: "DesignReviewer",
@@ -92,7 +90,6 @@ const projects = [
     link: "https://github.com/gargdhiren/DesignReviewer",
     liveLink: null,
     accent: "#4ECDC4",
-    featured: true,
   },
   {
     name: "Finance Guru",
@@ -103,8 +100,7 @@ const projects = [
     link: "https://github.com/gargdhiren/Finance-Guru",
     liveLink: null,
     accent: "#FFE66D",
-    featured: false,
-  }
+  },
 ];
 
 const skillsData: Record<string, { items: string[]; icon: string }> = {
@@ -523,9 +519,9 @@ export default function Portfolio() {
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#FF6B9D] mb-2">What I&apos;ve Built</p>
           <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-4">PROJECTS</h2>
           <p className="text-sm text-[#888] mb-12 max-w-lg">Side projects where I experiment with architecture, AI, and scale.</p>
-          <div className="grid md:grid-cols-2 gap-6 mb-6">
-            {projects.filter(p => p.featured).map((p, i) => (
-              <div key={i} className="group block border-2 border-[#e0e0e0] bg-white p-8 hover:border-[#1a1a1a] hover:-translate-y-1 transition-all relative overflow-hidden">
+          <div className="grid md:grid-cols-2 gap-6 items-stretch">
+            {projects.map((p, i) => (
+              <div key={i} className="group flex flex-col border-2 border-[#e0e0e0] bg-white p-8 hover:border-[#1a1a1a] hover:-translate-y-1 transition-all relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-1.5 h-full" style={{ background: p.accent }} />
                 <div className="flex items-center gap-2 mb-4">
                   <span className="text-[9px] font-bold uppercase tracking-wider text-white px-2 py-0.5 rounded" style={{ background: p.accent }}>Featured</span>
@@ -538,27 +534,14 @@ export default function Portfolio() {
                   <a href={p.link} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} on GitHub`} className="text-sm text-[#999] group-hover:text-[#1a1a1a] transition-colors">↗</a>
                 </div>
                 <p className="text-xs font-bold text-[#999] uppercase tracking-wider mb-3">{p.tagline}</p>
-                <p className="text-xs text-[#666] leading-relaxed mb-5">{p.description}</p>
+                <p className="text-xs text-[#666] leading-relaxed mb-5 flex-grow">{p.description}</p>
                 <div className="grid grid-cols-3 gap-3 mb-5">
                   {p.highlights.map((h, j) => (<div key={j} className="text-center"><div className="text-lg font-black">{h.value}</div><div className="text-[9px] text-[#999] uppercase tracking-wider">{h.label}</div></div>))}
                 </div>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-1.5 mt-auto">
                   {p.tech.map((t, j) => (<span key={j} className="text-[9px] font-bold bg-[#f8f8f8] border border-[#eee] px-1.5 py-0.5 rounded">{t}</span>))}
                 </div>
               </div>
-            ))}
-          </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {projects.filter(p => !p.featured).map((p, i) => (
-              <a key={i} href={p.link} target="_blank" rel="noopener noreferrer" className="group block border-2 border-[#e0e0e0] bg-white p-6 hover:border-[#1a1a1a] hover:-translate-y-1 transition-all relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-1 h-full group-hover:w-1.5 transition-all" style={{ background: p.accent }} />
-                <div className="flex items-start justify-between mb-1"><h3 className="text-base font-black">{p.name}</h3><span className="text-xs text-[#999] group-hover:text-[#1a1a1a] transition-colors">↗</span></div>
-                <p className="text-xs font-bold text-[#999] uppercase tracking-wider mb-2">{p.tagline}</p>
-                <p className="text-xs text-[#666] leading-relaxed mb-4">{p.description}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {p.tech.map((t, j) => (<span key={j} className="text-[9px] font-bold bg-[#f8f8f8] border border-[#eee] px-1.5 py-0.5 rounded">{t}</span>))}
-                </div>
-              </a>
             ))}
           </div>
         </div>
