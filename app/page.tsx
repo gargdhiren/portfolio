@@ -15,10 +15,22 @@ const journey = [
   { year: "Jul 2024", title: "Promoted to SDE", desc: "Full-time Software Engineer at ION Trading, Noida", icon: "⚡" },
   { year: "2025", title: "Angular OSS Contributor", desc: "Found & reported a framework bug — acknowledged by Angular team", icon: "🐛" },
   { year: "2026", title: "Launched RevisionBuddy", desc: "Full-stack AI-powered notes & spaced repetition app — live on Vercel", icon: "🧠" },
-  { year: "Mar 2026", title: "Looking for Next Chapter", desc: "Open to software engineering roles", icon: "🔭" },
+  { year: "Jul 2026", title: "Joined Adobe (via Tescra)", desc: "Software Engineer — full-stack React & Node.js on internal testing platform", icon: "🚀" },
 ];
 
 const experience = [
+  {
+    role: "Software Engineer",
+    company: "Adobe (via Tescra Software Pvt. Ltd.)",
+    period: "Jul 2026 – Present",
+    location: "Noida, India",
+    type: "Full-time",
+    tags: ["React", "Node.js", "TypeScript", "REST APIs", "End-to-End Testing", "CI/CD"],
+    bullets: [
+      { text: "Contribute to full-stack development of an internal testing portal, building and maintaining both the React frontend and Node.js backend with REST APIs, used by 15+ engineering teams across Adobe.", metric: "15+ teams" },
+      { text: "Performed end-to-end testing across 5+ projects spanning multiple Adobe product teams, improving automated test coverage and release reliability.", metric: "5+ projects" },
+    ],
+  },
   {
     role: "Software Engineer",
     company: "ION Trading India Private Limited",
@@ -96,11 +108,11 @@ const projects = [
 ];
 
 const skillsData: Record<string, { items: string[]; icon: string }> = {
-  Backend: { items: ["Java", "Spring Boot", "Spring MVC", "REST APIs", "JPA/Hibernate", "Prisma", "Server Actions", "System Design"], icon: "⚙️" },
-  Frontend: { items: ["Angular", "React", "Next.js", "Redux", "TypeScript", "JavaScript", "Tailwind CSS", "HTML5", "CSS3", "Nx"], icon: "🎨" },
+  Backend: { items: ["Node.js", "Java", "Spring Boot", "Spring MVC", "REST APIs", "JPA/Hibernate", "Prisma", "System Design"], icon: "⚙️" },
+  Frontend: { items: ["React", "Next.js", "Angular", "Redux", "TypeScript", "JavaScript", "Tailwind CSS", "HTML5", "CSS3", "Nx"], icon: "🎨" },
   "AI / ML": { items: ["GenAI", "LLM Integration", "RAG", "Vercel AI SDK", "Prompt Engineering", "Vector Databases", "Spring AI"], icon: "🧠" },
   "Data & Cloud": { items: ["PostgreSQL", "MySQL", "Neo4j", "Docker"], icon: "☁️" },
-  Testing: { items: ["JUnit", "Jest", "Cypress", "Selenium", "OWASP ZAP"], icon: "🧪" },
+  Testing: { items: ["Cypress", "Jest", "JUnit", "Selenium", "OWASP ZAP", "End-to-End Testing"], icon: "🧪" },
   "DevOps & Tools": { items: ["Git", "GitLab CI/CD", "Maven", "SonarQube", "Vercel", "Postman", "JIRA", "Agile/Scrum"], icon: "🔧" },
 };
 
@@ -126,7 +138,7 @@ const contactLinks = [
 ];
 
 const navLinks = ["about", "journey", "experience", "projects", "skills", "contact"];
-const heroTags = ["Angular", "TypeScript", "React.js", "Next.js", "CI/CD", "GenAI/LLM"];
+const heroTags = ["React", "Node.js", "TypeScript", "Angular", "Next.js", "GenAI/LLM"];
 
 const RESUME_URL = "https://drive.google.com/file/d/1uoFo3oyyJbVTlkLfkpK4RZLbHgUpPNUC/view?usp=sharing";
 
@@ -225,7 +237,6 @@ function LeetCodeHeatmap({ username }: { username: string }) {
   };
 
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  // Grid-aligned month labels: one cell per week column, label only on the week a new month starts.
   const monthRow: string[] = [];
   let lastMonth = -1;
   weeks.forEach((w) => {
@@ -281,7 +292,6 @@ function LeetCodeHeatmap({ username }: { username: string }) {
       ) : (
         <div className="overflow-x-auto">
           <div style={{ minWidth: "750px" }}>
-            {/* month labels — one flex cell per week column, aligned to the grid below */}
             <div className="flex gap-[3px]" style={{ paddingLeft: "32px" }}>
               {monthRow.map((label, i) => (
                 <div key={i} className="text-[9px] text-[#666]" style={{ width: "12px" }}>
@@ -406,8 +416,9 @@ export default function Portfolio() {
               </h1>
             </motion.div>
             <motion.p initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.6 }} className="mt-8 text-sm leading-relaxed max-w-lg text-[#555]">
-              I build systems that handle pressure. 2 years at{" "}
-              <span className="font-bold text-[#1a1a1a]">ION Trading</span> — engineering trading platforms processing{" "}
+              I build systems that handle pressure. Currently a Software Engineer at{" "}
+              <span className="font-bold text-[#1a1a1a]">Adobe (via Tescra)</span>, building full-stack tools in React &amp; Node.js. Previously 2 years at{" "}
+              <span className="font-bold text-[#1a1a1a]">ION Trading</span>, engineering trading platforms processing{" "}
               <span className="font-bold text-[#1a1a1a] bg-yellow-100 px-1">10,000 transactions/hour</span>.
               From automation to GenAI-powered interfaces, I turn complex problems into production-ready solutions.
             </motion.p>
@@ -427,7 +438,7 @@ export default function Portfolio() {
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4, duration: 0.8 }} className="hidden md:block relative">
             <div className="w-[280px] h-[340px] border-2 border-[#1a1a1a] overflow-hidden relative bg-[#f0f0f0] shadow-[6px_6px_0_0_rgba(26,26,26,0.08)]">
               <img src="/image.jpeg" alt="Dhiren Garg" className="w-full h-full object-cover object-top" />
-              <div className="absolute bottom-0 left-0 right-0 bg-[#1a1a1a] text-white px-4 py-2 text-[10px] font-bold tracking-wider">SDE @ ION TRADING • 2024–2026</div>
+              <div className="absolute bottom-0 left-0 right-0 bg-[#1a1a1a] text-white px-4 py-2 text-[10px] font-bold tracking-wider">SDE @ ADOBE (VIA TESCRA) • 2026</div>
             </div>
             <div className="absolute -bottom-3 -right-3 w-full h-full border-2 border-[#FF6B9D] -z-10" />
           </motion.div>
@@ -475,7 +486,7 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#FF6B9D] mb-2">Work History</p>
           <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-4">EXPERIENCE</h2>
-          <p className="text-sm text-[#888] mb-12 max-w-lg">2 years at ION Trading building high-throughput trading systems, from intern to full-time engineer.</p>
+          <p className="text-sm text-[#888] mb-12 max-w-lg">Full-stack engineer — currently at Adobe (via Tescra), previously 2 years at ION Trading building high-throughput trading systems.</p>
           <div className="space-y-16">
             {experience.map((exp, i) => (
               <div key={i} className="grid md:grid-cols-[220px_1fr] gap-8">
@@ -609,7 +620,7 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#FF6B9D] mb-2">Get in Touch</p>
           <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-4">LET&apos;S BUILD<br />SOMETHING GREAT</h2>
-          <p className="text-sm text-[#888] mb-12 max-w-md">Currently open to software engineering roles. I bring 2 years of trading systems experience, a strong DSA foundation, and a passion for building at scale.</p>
+          <p className="text-sm text-[#888] mb-12 max-w-md">Currently at Adobe (via Tescra) and open to software engineering roles. I bring 2 years of trading systems experience, a strong DSA foundation, and a passion for building at scale.</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {contactLinks.map((c, i) => (
               <a key={i} href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="block border-2 border-[#e0e0e0] p-5 hover:border-[#1a1a1a] hover:-translate-y-1 transition-all group">
